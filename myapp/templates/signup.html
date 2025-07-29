@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Signup Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .form-container {
+      background-color: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      width: 350px;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .help-text, .errorlist {
+      font-size: 0.85em;
+      color: #6c757d;
+      margin-bottom: 10px;
+      display: none; /* hidden by default */
+    }
+    .errorlist {
+      color: #dc3545;
+      display: block; /* errors always visible */
+      margin-bottom: 5px;
+      list-style: none;
+      padding-left: 0;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h1>Sign Up Form</h1>
+
+    <form method="post">
+      {% csrf_token %}
+
+      <!-- Username -->
+      <label for="id_username">Username:</label>
+      {{ form.username.errors }}
+      {{ form.username }}
+      <div class="help-text" id="help-username">
+        Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.
+      </div>
+
+      <!-- Email -->
+      <label for="id_email">Email:</label>
+      {{ form.email.errors }}
+      {{ form.email }}
+      <div class="help-text" id="help-email">
+        Enter a valid email address.
+      </div>
+
+      <!-- Password1 -->
+      <label for="id_password1">Password:</label>
+      {{ form.password1.errors }}
+      {{ form.password1 }}
+      <div class="help-text" id="help-password1">
+        Your password must contain at least 8 characters.<br>
+        Your password can’t be too similar to your other personal information.<br>
+        Your password can’t be a commonly used password.<br>
+        Your password can’t be entirely numeric.
+      </div>
+
+      <!-- Password2 -->
+      <label for="id_password2">Password confirmation:</label>
+      {{ form.password2.errors }}
+      {{ form.password2 }}
+      <div class="help-text" id="help-password2">
+        Enter the same password as before, for verification.
+      </div>
+
+      <button type="submit">Register</button>
+    </form>
+
+    <p>Already have an account? Please <a href="{% url 'login' %}">Login here</a>.</p>
+  </div>
+
+  <script>
+    // Show help text on focus, hide on blur
+    const fields = [
+      {inputId: 'id_username', helpId: 'help-username'},
+      {inputId: 'id_email', helpId: 'help-email'},
+      {inputId: 'id_password1', helpId: 'help-password1'},
+      {inputId: 'id_password2', helpId: 'help-password2'},
+    ];
+
+    fields.forEach(({inputId, helpId}) => {
+      const input = document.getElementById(inputId);
+      const helpText = document.getElementById(helpId);
+
+      if(input && helpText) {
+        input.addEventListener('focus', () => {
+          helpText.style.display = 'block';
+        });
+        input.addEventListener('blur', () => {
+          helpText.style.display = 'none';
+        });
+      }
+    });
+  </script>
+</body>
+</html>

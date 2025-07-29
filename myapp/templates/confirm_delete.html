@@ -1,0 +1,15 @@
+<!-- templates/confirm_delete.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Confirm Cancel</title>
+</head>
+<body>
+    <h2>Are you sure you want to cancel this?</h2>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Yes, Cancel</button>
+        <a href="{% url 'order_list' %}">No, go back</a>
+    </form>
+</body>
+</html>

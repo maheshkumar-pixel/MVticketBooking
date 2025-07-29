@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% load static %}
+
+    <style>
+      *{
+        padding:0px;
+        margin:0px;
+        text-align:center;
+      }
+        #navsection{
+      display:flex;
+      justify-content:space-evenly;
+      background-color:black;
+      color:white;
+    }
+
+    a{
+      font-weight:bold;
+      color:white;
+      text-decoration:none;
+    }
+    marquee{
+      color:white;
+      font-weight:bold;
+      background-color:navy;
+    }
+  
+    body {
+    background-image: url("{% static 'E:\pythonproject\djangoproject\static\myapp\pictures\bus1.jpeg' %}");
+    background-size: cover;
+    background-repeat: no-repeat;
+    
+  }
+    </style>
+</head>
+<body>
+    <div id ="navsection">
+        
+    <a href="{% url 'home_view' %}">Home</a>
+        <a href="{% url 'book_ticket' %}">Book ticket</a>
+        <a href="{% url 'order_list' %}">View My Bookings</a>
+        <a href="{% url 'trip_package' %}">Trip package</a>
+        <a href="{% url 'submit_package' %}">Submit package</a>
+        <a href="{% url 'logout' %}">logout</a>
+
+
+  </div>
+  
+  <marquee direction="left"> these is the applicateion specially devloped for the  clients who needs for the traveeling!!!,register with our app and start your visitings to the cities  and manage your bookings...</marquee>
+  
+    
+  <script></script>  
+</body>
+</html>

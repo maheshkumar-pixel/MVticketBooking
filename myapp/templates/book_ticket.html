@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="csrf-token" content="{{ csrf_token }}">
+  <title>Seat Layout</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      box-sizing: border-box;
+    }
+
+    #details {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .name{
+      margin:10px 10px;
+    }
+
+    #selectseat {
+      height: 300px;
+      width: 400px;
+      box-shadow: 2px 3px 3px 2px black;
+      display: none;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 20px;
+      padding: 10px;
+    }
+
+    #leftseat, #rightseat {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      height: 100%;
+    }
+    #plan{
+      margin:10px 10px 
+
+    }
+
+    .seat {
+      height: 25px;
+      width: 25px;
+      background-color: green;
+      color: white;
+      border: 2px solid black;
+      font-size: 10px;
+    }
+
+    #middle {
+      display: flex;
+      flex-direction: column;
+      width: 30px;
+    }
+
+    #navsection {
+      display: flex;
+      justify-content: space-evenly;
+      background-color: black;
+      color: white;
+    }
+
+    a {
+      font-weight: bold;
+      color: white;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="navsection">
+    <a href="{% url 'home_view' %}">Home</a>
+    <a href="{% url 'book_ticket' %}">Book Ticket</a>
+    <a href="{% url 'order_list' %}">View My Bookings</a>
+    <a href="{% url 'submit_package' %}">Submit Package</a>
+    <a href="{% url 'logout' %}">Logout</a>
+  </div>
+
+  <h1>Welcome to Ticket Booking</h1>
+  <div id="details">
+    <div class="name">
+    <label for="name">Enter Name:</label>
+    <input type="text" id="name" name="name" placeholder="Enter your name" required><br>
+   </div>
+    <div class="source" id="plan">
+    <label for="source"> Enter source:</label>
+    <input list="sourcelist" id="source" placeholder="enter the source"/>
+    <datalist id="sourcelist">
+        <option value="banglore">banglore</option>
+        <option value="chennai">Chennai</option>
+        <option value="thirupathi">Thirupathi</option>
+        <option value="Manglore">manglore</option>
+        <option value="Kr puram">Kr puram</option>
+        <option value="Hosakote">Hosakote</option>
+        <option value="kolar">Kolar</option>
+        <option value="kgf">Kgf</option>
+        <option value="bangarpete">Bangarpete</option>
+        <option value="malur">Malur</option>
+        <option value="Mumbai">Mumbai</option>
+        <option value="andra">Andrapradesh</option>
+        <option value="hyderabad">hyderabad</option>
+        <option value="madanapalli">Madanapalli</option>
+        <option value="telangana">Telangana</option>
+        <option value="hosur">Hosur</option>
+        <option value="kbs busstop">Kbs busstop</option>
+        <option value="kerala">Kerala</option>
+        <option value="vaynadu">Vaynadu</option>
+        <option value="Ooty">Ooty</option>
+        <option value="anekal">Anekal</option>
+    </datalist><br>
+    </div>
+    <div class="destination" id="plan">
+    <label for="destination">Enter Destination</label>
+    <input list="destinationlist" id="destination" placeholder="Enter destination "/>
+    <datalist id="destinationlist">
+        <option value="banglore">banglore</option>
+        <option value="chennai">Chennai</option>
+        <option value="thirupathi">Thirupathi</option>
+        <option value="Manglore">manglore</option>
+        <option value="Kr puram">Kr puram</option>
+        <option value="Hosakote">Hosakote</option>
+        <option value="kolar">Kolar</option>
+        <option value="kgf">Kgf</option>
+        <option value="bangarpete">Bangarpete</option>
+        <option value="malur">Malur</option>
+        <option value="Mumbai">Mumbai</option>
+        <option value="andra">Andrapradesh</option>
+        <option value="hyderabad">hyderabad</option>
+        <option value="madanapalli">Madanapalli</option>
+        <option value="telangana">Telangana</option>
+        <option value="hosur">Hosur</option>
+        <option value="kbs busstop">Kbs busstop</option>
+        <option value="kerala">Kerala</option>
+        <option value="vaynadu">Vaynadu</option>
+        <option value="Ooty">Ooty</option>
+        <option value="anekal">Anekal</option>
+    </datalist><br>
+    </div>
+    
+<div class="bustype" id="plan">
+    <label for="bustype">Select Bus Type:</label>
+    <select id="bustype" required>
+      <option value="ordinary bus">Ordinary Bus</option>
+      <option value="ac bus">AC Bus</option>
+      <option value="sleeper coach">Sleeper Coach</option>
+    </select><br>
+    </div>
+
+    
+    <div id="pricepredictor"></div>
+    <button onclick="visible()">Select Seat</button>
+
+    <div id="selectseat">
+      <div id="leftseat">
+        <button class="seat" data-user-id="LW1">LW1</button>
+        <button class="seat" data-user-id="LW2">LW2</button>
+        <button class="seat" data-user-id="LW3">LW3</button>
+        <button class="seat" data-user-id="LW4">LW4</button>
+        <button class="seat" data-user-id="LW5">LW5</button>
+        <button class="seat" data-user-id="LW6">LW6</button>
+      </div>
+
+      <div id="middle">
+        <button class="seat" data-user-id="MW1">MW1</button>
+        <button class="seat" data-user-id="MW2">MW2</button>
+        <button class="seat" data-user-id="MW3">MW3</button>
+        <button class="seat" data-user-id="MW4">MW4</button>
+        <button class="seat" data-user-id="MW5">MW5</button>
+        <button class="seat" data-user-id="MW6">MW6</button>
+      </div>
+
+      <div id="rightseat">
+        <button class="seat" data-user-id="RW1">RW1</button>
+        <button class="seat" data-user-id="RW2">RW2</button>
+        <button class="seat" data-user-id="RW3">RW3</button>
+        <button class="seat" data-user-id="RW4">RW4</button>
+        <button class="seat" data-user-id="RW5">RW5</button>
+        <button class="seat" data-user-id="RW6">RW6</button>
+      </div>
+    </div><br>
+      <div id="plan">
+    <label for="date">Enter Date:</label>
+    <input type="date" id="date" name="date" required><br>
+    </div>
+
+    <label for="time">Select Time:</label>
+    <select id="time" required>
+      <option value="13:00">1:00PM</option>
+      <option value="14:00">2:00PM</option>
+      <option value="15:00">3:00PM</option>
+      <option value="16:00">4:00PM</option>
+      <option value="17:00">5:00PM</option>
+      <option value="19:00">7:00PM</option>
+      <option value="20:00">8:00PM</option>
+      <option value="21:00">9:00PM</option>
+      <option value="22:00">10:00PM</option>
+      <option value="23:00">11:00PM</option>
+      <option value="00:00">12:00AM</option>
+    </select><br>
+
+    <button onclick="submitForm()">Submit</button>
+  </div>
+
+  <script>
+    const CSRF_TOKEN = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+    const selectseat = document.getElementById('selectseat');
+    const seats = document.querySelectorAll('.seat');
+    const bustypeSelect=document.getElementById('bustype')
+    let selectedSeat = null;
+    
+        const sourceInput = document.getElementById('source');
+const destinationInput = document.getElementById('destination');
+let actual_price = 0;
+
+function calculatePrice(source, destination, bustype) {
+    const price = Math.abs(source.length + destination.length) * 50;
+    
+    switch(bustype) {
+        case 'ac bus':
+            return price + 100;
+        case 'sleeper coach':
+            return price + 150;
+        case 'ordinary bus':
+        default:
+            return price;
+    }
+}
+
+function updatePrice() {
+    const pricepredictor = document.getElementById('pricepredictor');
+    const source = sourceInput.value.trim();
+    const destination = destinationInput.value.trim();
+    const bustype = bustypeSelect.value;
+    
+    if (!source || !destination) {
+        pricepredictor.textContent = '';
+        return;
+    }
+    
+    actual_price = calculatePrice(source, destination, bustype);
+    pricepredictor.textContent = `Your Estimated price: ₹${actual_price}`;
+}
+
+// Initialize event listeners
+sourceInput.addEventListener('input', updatePrice);
+destinationInput.addEventListener('input', updatePrice);
+bustypeSelect.addEventListener('change', updatePrice);
+
+
+
+    function visible() {
+      selectseat.style.display = 'flex';
+    }
+
+    seats.forEach(seat => {
+      seat.addEventListener('click', () => {
+        seats.forEach(s => s.style.backgroundColor = 'green');
+        seat.style.backgroundColor = 'red';
+        selectedSeat = seat.dataset.userId;
+        console.log("Seat selected:", selectedSeat);
+        selectseat.style.display = 'none';
+      });
+    });
+
+    async function submitForm() {
+      try {
+        if (!selectedSeat) throw new Error("Please select a seat before submitting.");
+
+        const requiredFields = ['name', 'source', 'destination', 'date', 'time'];
+        for (const fieldId of requiredFields) {
+          const field = document.getElementById(fieldId);
+          if (!field.value.trim()) throw new Error(`Please fill in the ${fieldId} field.`);
+        }
+
+        const formData = {
+          name: document.getElementById('name').value,
+          source: document.getElementById('source').value,
+          destination: document.getElementById('destination').value,
+          bus_type: bustypeSelect.value,
+          ticket_amount: actual_price,
+          seat_number: selectedSeat,
+          select_date: document.getElementById('date').value,
+          select_time: document.getElementById('time').value,
+        };
+
+        const response = await fetch("{% url 'submit_booking' %}", {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': CSRF_TOKEN,
+          },
+          body: JSON.stringify(formData),
+        });
+
+        const contentType = response.headers.get('content-type');
+        if (!contentType || !contentType.includes('application/json')) {
+          const text = await response.text();
+          console.error('Non-JSON response:', text);
+          throw new Error('Server returned an invalid response. Please try again.');
+        }
+
+        const data = await response.json();
+
+        if (!response.ok || data.status !== "success") {
+          throw new Error(data.message || 'Booking failed. Please try again.');
+        }
+
+        alert('Ticket booked successfully!');
+        if (data.redirect_url) {
+          window.location.href = data.redirect_url;
+        }
+
+      } catch (error) {
+        console.error('Submission error:', error);
+        alert(error.message);
+      }
+    }
+  </script>
+</body>
+</html>

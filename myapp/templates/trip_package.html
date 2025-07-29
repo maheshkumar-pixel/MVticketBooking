@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Trip Packages</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      font-family: sans-serif;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    #packagecontainer {
+      background-color: rgb(239, 240, 240);
+      padding: 20px;
+      display:flex;
+      justify-content:space-evenly;
+    }
+
+    .packages{
+      width: 200px;
+      margin:10px 10px;
+      border: 2px solid #000000;
+      box-shadow: 3px 5px 8px 2px rgb(60, 59, 59);
+      background-color: white;
+      padding: 10px;
+    }
+
+    .label-title {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 8px;
+      border-bottom: 3px solid black;
+      padding-bottom: 5px;
+    }
+
+    #scrollable {
+      height: 250px;
+      overflow-y: auto;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    li {
+      border-inline: 2px solid black;
+      margin: 2px 0;
+      padding: 5px;
+    }
+
+    h2 {
+      color: black;
+      margin-bottom: 10px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    #navsection{
+      display:flex;
+      justify-content:space-evenly;
+      background-color:black;
+      color:white;
+    }
+    a{
+      font-weight:bold;
+      color:white;
+      text-decoration:none;
+    }
+  </style>
+</head>
+<body>
+  <div id ="navsection">
+    <a href="{% url 'book_ticket' %}">Book ticket</a>
+    <a href="{% url 'order_list' %}">View My Bookings</a>
+    <a href="{% url 'trip_package' %}">Trip package</a>
+    
+    <a href="{% url 'logout' %}">logout</a>
+
+
+  </div>
+  <h1>Trip packages...🚍🚍🚍🚍</h1>
+  <label for="name" >Enter name:</label>
+  <input type="text" id="cust_name" placeholder="enter name"/><br>
+  <div id="packagecontainer">
+    <div id="packagecontent">
+    <div id="package1"class='packages'>
+      <span class="label-title">Devine Places</span>
+      
+      <div id="scrollable">
+        <ul id="devine_places">
+          <li>Haryana</li>
+          <li>Chandigarh</li>
+          <li>Malpe</li>
+          <li>Udupi</li>
+          <li>Andhra Pradesh</li>
+          <li>Kodaikanal</li>
+          <li>Madurai</li>
+          <li>Lalbagh</li>
+          <li>Hampi</li>
+          <li>Belagavi</li>
+          <li>Anekal</li>
+          <li>Bangalore</li>
+          <li>Chennai</li> 
+        </ul>
+      </div>
+    </div>
+    <h2>Amount: RS.2500</h2>
+    <h3>Duration:2 days. </h3>
+    <label for="no_of_tickets">No_of_Ticket</label>
+      <select id="no_of_tickets">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+      </select><br>
+    <button onclick="submit('devine_places')">Book ticket </button>
+    </div>
+    <div id="packagecontent">
+    <div id="package2" class="packages">
+      <span class="label-title">Intercity rounds</span>
+      <div id="scrollable">
+        <ul id="intercity_rounds">
+          <li>Bihar</li>
+          <li>Chandigarh</li>
+          <li>Malpe</li>
+          <li>Udupi</li>
+          <li>Andhra Pradesh</li>
+          <li>Kodaikanal</li>
+          <li>Madurai</li>
+          <li>Lalbagh</li>
+          <li>Hampi</li>
+          <li>Belagavi</li>
+          <li>Anekal</li>
+          <li>Bangalore</li>
+          <li>Chennai</li> 
+        </ul>
+      </div>
+      </div>
+      <h2> Amount:Rs.4000</h2>
+      <h3>Duration :5 days.</h3>
+      <label for="no_of_tickets">No_of_Ticket</label>
+      <select id="no_of_tickets">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+      </select><br>
+      <button onclick="submit('intercity_rounds')">Book ticket</button>
+      </div>
+      <div id="packagecontent" >
+    <div id="package3" class='packages'>
+      <span class="label-title">Greenary areas</span>
+      
+      <div id="scrollable">
+        <ul id="greenary_areas">
+          <li>Kolkatha</li>
+          <li>Chandigarh</li>
+          <li>Malpe</li>
+          <li>Udupi</li>
+          <li>Andhra Pradesh</li>
+          <li>Kodaikanal</li>
+          <li>Madurai</li>
+          <li>Lalbagh</li>
+          <li>Hampi</li>
+          <li>Belagavi</li>
+          <li>Anekal</li>
+          <li>Bangalore</li>
+          <li>Chennai</li> 
+        </ul>
+      </div>
+    </div>
+    <h2>Amount: RS.2500</h2>
+    <h3>Duration:3 days.</h3>
+    <label for="no_of_tickets">No_of_Tickets</label>
+      <select id="no_of_tickets">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+      </select><br>
+    <button onclick="submit('greenary_areas')">Book ticket </button>
+    </div>
+    <div id="packagecontent">
+    <div id="package4" class='packages'>
+      <span class="label-title">Old temples </span>
+      
+      <div id="scrollable">
+        <ul id="old_temples">
+          <li>Banglore</li>
+          <li>Chandigarh</li>
+          <li>Malpe</li>
+          <li>Udupi</li>
+          <li>Andhra Pradesh</li>
+          <li>Kodaikanal</li>
+          <li>Madurai</li>
+          <li>Lalbagh</li>
+          <li>Hampi</li>
+          <li>Belagavi</li>
+          <li>Anekal</li>
+          <li>Bangalore</li>
+          <li>Chennai</li> 
+        </ul>
+      </div>
+    </div>
+    <h2>Amount: RS.2500</h2>
+    <h3>Duration: 3 days.</h3>
+    <label for="no_of_tickets">No_of_Ticket</label>
+      <select id="no_of_tickets">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+      </select><br>
+    <button onclick="submit('old_temples')">Book ticket</button>
+    </div>
+    <div id="packagecontent">
+    <div id="package5" class='packages'>
+      <span class="label-title">Guard sections</span>
+      
+      <div id="scrollable">
+        <ul id="guard_sections">
+          <li>Kashmir</li>
+          <li>Chandigarh</li>
+          <li>Malpe</li>
+          <li>Udupi</li>
+          <li>Andhra Pradesh</li>
+          <li>Kodaikanal</li>
+          <li>Madurai</li>
+          <li>Lalbagh</li>
+          <li>Hampi</li>
+          <li>Belagavi</li>
+          <li>Anekal</li>
+          <li>Bangalore</li>
+          <li>Chennai</li> 
+        </ul>
+      </div>
+    </div>
+    <h2>Amount: RS.2500</h2>
+    <h3>Duration:3days</h3>
+    <label for="no_of_tickets">No_of_Ticket</label>
+      <select id="no_of_tickets">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+      </select><br>
+    <button onclick="submit('guard_sections')">Book ticket</button>
+    </div>
+  </div>
+  <script>
+// Function to get CSRF token from cookies
+function getCSRFToken() {
+    const cookieValue = document.cookie
+        .split('; ')
+        .find(row => row.startsWith('csrftoken='))
+        ?.split('=')[1];
+    return cookieValue;
+}
+
+function submit(package_id) {
+    const packages = document.querySelectorAll(`#${package_id} li`);
+    let listarray = [];
+
+    packages.forEach(item => {
+        listarray.push(item.textContent.trim());
+    });
+
+    const container = document.getElementById(package_id).closest('#packagecontent');
+    const cust_name=document.getElementById('cust_name').value;
+    const name = container.querySelector('.label-title').textContent.trim();
+    const amount = parseFloat(container.querySelector('h2').textContent.replace(/[^\d.]/g, ''));
+    const duration = parseInt(container.querySelector('h3').textContent.replace(/[^\d]/g, ''));
+    const no_of_tickets=document.getElementById("no_of_tickets").value;
+    console.log(no_of_tickets)
+    console.log(cust_name)
+
+
+    const data = {
+      cust_name:cust_name,
+        name: name,
+        amount: amount,
+        duration: duration,
+        no_of_tickets:no_of_tickets,
+        places: listarray
+    };
+
+    fetch('/submit-package/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCSRFToken(),
+            'X-Requested-With': 'XMLHttpRequest'  // Recommended for Django to identify AJAX requests
+        },
+        body: JSON.stringify(data),
+        credentials: 'include'
+    })
+    .then(response => response.json())
+    .then(json => {
+        // Create feedback element if it doesn't exist
+        let feedback = document.getElementById("feedback");
+        if (!feedback) {
+            feedback = document.createElement('div');
+            feedback.id = "feedback";
+            document.body.prepend(feedback);
+        }
+        
+        if (json.status === "success") {
+            feedback.textContent = `✅ Package "${name}" booked successfully!`;
+            feedback.style.color = "green";
+            if (json.redirect_url) {
+                window.location.href = json.redirect_url;
+            }
+        } else {
+            feedback.textContent = `❌ Error: ${json.message}`;
+            feedback.style.color = "red";
+        }
+    })
+    .catch(error => {
+        const feedback = document.getElementById("feedback") || document.createElement('div');
+        feedback.id = "feedback";
+        feedback.textContent = `❌ Network error: ${error}`;
+        feedback.style.color = "red";
+        document.body.prepend(feedback);
+    });
+}
+</script>
+
+
+
+</body>
+</html>
